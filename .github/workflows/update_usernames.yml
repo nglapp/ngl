@@ -1,0 +1,18 @@
+name: Update Usernames
+
+on:
+  workflow_run:
+    workflows: ["Build and Deploy"]  # Replace with the name of your CI/CD workflow
+    types:
+      - completed
+
+jobs:
+  update-usernames:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Update Usernames
+        run: echo "${{ github.event_name }}" >> usernames.txt
