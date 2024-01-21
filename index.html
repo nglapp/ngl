@@ -122,5 +122,17 @@
         </form>
     </div>
 </body>
-
+<script>
+    Let url='https://script.google.com/macros/s/AKfycbxdoSpTZJ7zUp5xFuwBxdeXsvtt7lwzAdo0Shy6EntoED5JibZHGZLfmkQdoKZc9B95/exec'
+    Let form document.querySelector('#form');
+    form.addEventListener("submit",(e)=>{
+        Let d=new FormData(form);
+        fetch(url,{
+            method:"POST",
+            body:d
+        }).then((res)=>res.text())
+         .then((finalRes)=>console.log(finalRes))
+         e.preventDefault();
+    })
+</script>
 </html>
