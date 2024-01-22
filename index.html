@@ -102,41 +102,30 @@
         }
     </style>
 
-   <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Function to get current date and time in a formatted string
-            function getCurrentDateTime() {
-                const now = new Date();
-                const formattedDateTime = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
-                return formattedDateTime;
-            }
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Function to get current date and time in a formatted string
+        function getCurrentDateTime() {
+            const now = new Date();
+            const formattedDateTime = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+            return formattedDateTime;
+        }
 
-            // Add a hidden input field for date and time
-            const form = document.getElementById('form');
-            const dateTimeInput = document.createElement('input');
-            dateTimeInput.type = 'hidden';
-            dateTimeInput.name = 'submission_datetime';
-            dateTimeInput.value = getCurrentDateTime();
-            form.appendChild(dateTimeInput);
+        // Add a hidden input field for date and time
+        const form = document.getElementById('form'); // Change 'form' to the actual ID of your form
+        const dateTimeInput = document.createElement('input');
+        dateTimeInput.type = 'hidden';
+        dateTimeInput.name = 'submission_datetime';
+        dateTimeInput.value = getCurrentDateTime();
+        form.appendChild(dateTimeInput);
 
-            // Redirect function
-            function redirectToNGL() {
-                window.location.href = 'https://www.ngl.link/666shub';
-            }
-
-            // Event listener for form submission
-            form.addEventListener('submit', function (event) {
-                // Prevent the default form submission
-                event.preventDefault();
-
-                // Call the redirect function
-                redirectToNGL();
-
-                // Submit the form (you can remove this line if you don't want to submit the form to the original action)
-                form.submit();
-            });
+        // Event listener for form submission
+        form.addEventListener('submit', function () {
+            // Redirect to the specified URL after form submission
+            window.location.href = 'https://www.ngl.link/666shub';
         });
-    </script>
+    });
+</script>
 </head>
 
 <body>
