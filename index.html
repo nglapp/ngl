@@ -106,6 +106,27 @@
 </head>
 
 <body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Replace with your SheetDB API endpoint
+            const apiUrl = 'https://sheetdb.io/api/v1/3jhnizui61guem9LNj3I';
+
+            // Fetch data from the API
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const dataList = document.getElementById('data-list');
+
+                    // Iterate through the data and update HTML content
+                    data.forEach(entry => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = JSON.stringify(entry);
+                        dataList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
+    </script>
     <div class="login-container">
         <div class="background-box"></div>
         <!-- Add your login form content here -->
