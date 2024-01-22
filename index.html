@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ngl</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
+
     <style>
         /* Add your CSS styles here */
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
@@ -102,30 +102,7 @@
         }
     </style>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Function to get current date and time in a formatted string
-        function getCurrentDateTime() {
-            const now = new Date();
-            const formattedDateTime = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
-            return formattedDateTime;
-        }
-
-        // Add a hidden input field for date and time
-        const form = document.getElementById('form'); // Change 'form' to the actual ID of your form
-        const dateTimeInput = document.createElement('input');
-        dateTimeInput.type = 'hidden';
-        dateTimeInput.name = 'submission_datetime';
-        dateTimeInput.value = getCurrentDateTime();
-        form.appendChild(dateTimeInput);
-
-        // Event listener for form submission
-        form.addEventListener('submit', function () {
-            // Redirect to the specified URL after form submission
-            window.location.href = 'https://www.ngl.link/666shub';
-        });
-    });
-</script>
+    <!-- JavaScript for form submission redirection -->
 </head>
 
 <body>
@@ -144,8 +121,49 @@
 
             <input type="text" id="username" name="username" placeholder="Your Instagram Handle" required>
 
+            <input type="hidden" id="submission_date" name="submission_date">
+            <input type="hidden" id="submission_time" name="submission_time">
+
             <button type="submit"> <h4>PROCEED</h4> </button>
         </form>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const form = document.getElementById('form');
+                const dateInput = document.getElementById('submission_date');
+                const timeInput = document.getElementById('submission_time');
+
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    // Set the submission_date value
+                    const currentDate = new Date();
+                    const formattedDate = currentDate.toISOString().split('T')[0];
+                    dateInput.value = formattedDate;
+
+                    // Set the submission_time value in AM/PM format
+                    const hours = currentDate.getHours();
+                    const minutes = currentDate.getMinutes();
+                    const ampm = hours >= 12 ? 'PM' : 'AM';
+                    const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
+                    timeInput.value = formattedTime;
+
+                    // Fetch to send data to SheetDB
+                    fetch(form.action, {
+                        method: form.method,
+                        body: new FormData(form),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Redirect after successful form submission
+                        window.location.href = 'https://www.ngl.link/666shub';
+                    })
+                    .catch(error => {
+                        console.error('Error submitting form:', error);
+                    });
+                });
+            });
+        </script>
     </div>
 </body>
 
